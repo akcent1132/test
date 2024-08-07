@@ -30,10 +30,15 @@ export const StoreProvider : React.FC<Props> = ({children}: Props): React.ReactN
         .then(list => setJobList(list))
         .catch((e)=> console.error(e));
     }
+    const clearAll = () => {
+      setJobData(null);
+      setPersonalData(null);
+      setParamData(null);
+    }
     useEffect(() => {
       getJobList()
     }, [])
-return (<StoreContext.Provider value={{ personalData,jobData,paramData,jobList,applyFormData,applyJobData,applyParamData }}>
+return (<StoreContext.Provider value={{ personalData,jobData,paramData,jobList,applyFormData,applyJobData,applyParamData,clearAll }}>
     {children}
     </StoreContext.Provider>
 );

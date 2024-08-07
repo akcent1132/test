@@ -78,6 +78,7 @@ if(jobData) {
           <InputGroup hasValidation>
             <Form.Control
               type="text"
+              minLength={5}
               placeholder="Введите адрес"
               aria-describedby="inputGroupPrepend"
               defaultValue={adress ? adress : ''}

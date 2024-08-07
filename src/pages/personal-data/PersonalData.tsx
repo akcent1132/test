@@ -8,21 +8,21 @@ import { useStorage } from "../../store/contextStore";
 import { warnText } from "../../utils/static";
 import { TPersonalData } from "../../utils/types";
 type StorageData = {
-  ApplyFormData: (data:TPersonalData) => void;
+  applyFormData: (data:TPersonalData) => void;
   personalData: TPersonalData;
 }
 export const PersonalData: React.FC = () => {
     const navigate = useNavigate();
-    const { ApplyFormData,personalData }: StorageData   = useStorage();
+    const { applyFormData,personalData }: StorageData   = useStorage();
     const [validated, setValidated] = useState(false);
     const [isValidMask,setValidMask] = useState(false);
-    const submitForm = (form: Array<Record<string,string>>) => {
 
+    const submitForm = (form: Array<Record<string,string>>) => {
         const obj : Record<string,string> = {};
         for(let i = 0 ;i < 4;i++){      
           obj[form[i]['id']] = form[i]['value'];   
         }
-        ApplyFormData(obj as TPersonalData);
+        applyFormData(obj as TPersonalData);
         navigate('/job'); 
     }
     const handleInputPhone = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,6 +33,7 @@ export const PersonalData: React.FC = () => {
         if(inputValue.length > 1){      
             inputValue.pop();
             const num = inputValue.join('').replace(/\D/g, '').match(/(\d{0,4})(\d{0,3})(\d{0,3})/);
+            if(num)
             e.target.value =  + num[1] + (num[2] ? ` ${num[2]}` : '') + (num[3] ? ` ${num[3]}` : '');
             e.target.value = '0' + e.target.value;
         }else{
@@ -40,6 +41,7 @@ export const PersonalData: React.FC = () => {
             }
         }else{
             const num = e.target.value.replaceAll(' ','').replace(/\D/g, '').match(/(\d{0,4})(\d{0,3})(\d{0,3})/);
+            if(num)
             e.target.value = + num[1] + (num[2] ? ` ${num[2]}` : '') + (num[3] ? ` ${num[3]}` : '');
             e.target.value = '0' + e.target.value;
         }
