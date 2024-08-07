@@ -1,7 +1,5 @@
 import React, {
     createContext,
-    FC,
-    PropsWithChildren,
     useContext,
     useEffect,
     useState,
@@ -23,7 +21,7 @@ export const StoreProvider : React.FC<Props> = ({children}: Props): React.ReactN
     const applyJobData = (data:TJobData) => {
       setJobData(data);
     }
-    const ApplyFormData = (form:TPersonalData) => {
+    const applyFormData = (form:TPersonalData) => {
         setPersonalData(form)
     }
     const getJobList = () => {
@@ -35,7 +33,7 @@ export const StoreProvider : React.FC<Props> = ({children}: Props): React.ReactN
     useEffect(() => {
       getJobList()
     }, [])
-return (<StoreContext.Provider value={{ personalData,jobData,paramData,jobList,ApplyFormData,applyJobData,applyParamData }}>
+return (<StoreContext.Provider value={{ personalData,jobData,paramData,jobList,applyFormData,applyJobData,applyParamData }}>
     {children}
     </StoreContext.Provider>
 );
